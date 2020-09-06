@@ -13,7 +13,7 @@
                 CURLOPT_RETURNTRANSFER => TRUE,
                 CURLOPT_TIMEOUT => 30
             ] );
-            preg_match_all( '/<h2>Current Version – ([0-9]+\.[0-9]+\.[0-9]+)<\/h2>/', curl_exec( $ch ), $matches );
+            preg_match_all( '/Current Version  ([0-9]+\.[0-9]+\.[0-9]+)/', curl_exec( $ch ), $matches );
             if( count( $matches[ 1 ] ) === 1 ) {
                 if( isset( $version ) && $matches[ 1 ][ 0 ] === $version ) {
                     if( is_file( $filename = __DIR__ . '/core/config/config.inc.php' ) ) {
