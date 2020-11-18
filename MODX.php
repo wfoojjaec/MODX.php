@@ -13,7 +13,7 @@
                 CURLOPT_RETURNTRANSFER => TRUE,
                 CURLOPT_TIMEOUT => 30
             ] );
-            preg_match_all( '/Current Version:\s+([0-9]+\.[0-9]+\.[0-9]+)/', curl_exec( $ch ), $matches );
+            preg_match_all( '/Current Version:\s+([0-9]+\.[0-9]+\.[0-9]+)/i', curl_exec( $ch ), $matches );
             if( count( $matches[ 1 ] ) === 1 ) {
                 if( isset( $version ) && $matches[ 1 ][ 0 ] === $version ) {
                     if( is_file( $filename = __DIR__ . '/core/config/config.inc.php' ) ) {
@@ -46,8 +46,6 @@
                         else
                             echo 'is_file ' . $filename;
                 } elseif( $fp = fopen( $filename = 'modx-' . $matches[ 1 ][ 0 ] . '-pl-advanced.zip', 'w+' ) ) {
-                    fclose( $fp );
-                    return;
                     curl_setopt_array( $ch, [
                         CURLOPT_FILE => $fp,
                         //CURLOPT_URL => 'https://modx.com/download/direct?id=' . $filename . '&0=abs'
